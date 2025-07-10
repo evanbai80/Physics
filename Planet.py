@@ -7,7 +7,7 @@ pygame.init()
 screen = pygame.display.set_mode((1600, 1000))
 
 wario=pygame.image.load('png-clipart-wario-land-super-mario-land-3-luigi-mario-wario-wario-world-mario-heroes-hand-thumbnail.png')
-
+wario=pygame.transform.scale(wario,(30,30) )
 class Planet:
     def __init__(self,name,mass,velocity,position,a):
         self.name=name
@@ -48,6 +48,7 @@ def distance(pos1,pos2):
 g=10
 tc=0.01
 while True:
+    originalpos=v.center
     #time.sleep(0.1)
     for event in pygame.event.get():
         if event.type==pygame.QUIT:
@@ -72,9 +73,11 @@ while True:
         objects[i].velocity=((objects[i].velocity[0]+(tc*objects[i].a[0]))),(objects[i].velocity[1]+(tc*objects[i].a[1]))
         objects[i].position=(objects[i].position[0]+tc*objects[i].velocity[0],objects[i].position[1]+tc*objects[i].velocity[1])
         rects[i].topleft=(objects[i].position)
+    pygame.draw.line(screen,(255,255,255),(originalpos),v.center)
     screen.fill((0,0,0))
     screen.blit(E,e)
     screen.blit(M,m)
     screen.blit(V,v)
     E.blit(wario,e.topleft)
+    #print (e.topleft)
     pygame.display.update()
