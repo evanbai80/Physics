@@ -8,6 +8,10 @@ screen = pygame.display.set_mode((1600, 1000))
 
 wario=pygame.image.load('png-clipart-wario-land-super-mario-land-3-luigi-mario-wario-wario-world-mario-heroes-hand-thumbnail.png')
 wario=pygame.transform.scale(wario,(30,30) )
+MARS=pygame.image.load('3D_Mars.png')
+MARS=pygame.transform.scale(MARS,(15,15))
+venus=pygame.image.load('VENUS.png')
+venus=pygame.transform.scale(venus,(25,25))
 class Planet:
     def __init__(self,name,mass,velocity,position,a):
         self.name=name
@@ -16,7 +20,7 @@ class Planet:
         self.position=position
         self.a=a
 
-        
+trail=[]
 WHITE=(255,255,255)
 objects=[]
 Earth=Planet("Earth",50000,(0,0),(800,470),[0.0,0.0])
@@ -73,11 +77,14 @@ while True:
         objects[i].velocity=((objects[i].velocity[0]+(tc*objects[i].a[0]))),(objects[i].velocity[1]+(tc*objects[i].a[1]))
         objects[i].position=(objects[i].position[0]+tc*objects[i].velocity[0],objects[i].position[1]+tc*objects[i].velocity[1])
         rects[i].topleft=(objects[i].position)
-    pygame.draw.line(screen,(255,255,255),(originalpos),v.center)
+    
     screen.fill((0,0,0))
-    screen.blit(E,e)
-    screen.blit(M,m)
-    screen.blit(V,v)
-    E.blit(wario,e.topleft)
+    screen.blit(wario,e.topleft)
+#    screen.blit(E,e)
+    screen.blit(MARS,m.topleft)
+    screen.blit(venus,v.topleft)
+    
     #print (e.topleft)
+    trail.append(pygame.draw.line(screen,(255,255,255),(originalpos),v.center))
+    
     pygame.display.update()
